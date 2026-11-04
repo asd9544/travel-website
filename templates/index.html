@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅遊景點分享網站</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #fff8d6;
+    margin: 0;
+    padding: 30px;
+}
+
+        h1 {
+    text-align: center;
+    color: #d69b00;
+    font-size: 32px;
+}
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .card {
+    background: #fffdf2;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 18px;
+    border: 2px solid #f5d76e;
+    box-shadow: 0 4px 12px #e8dba8;
+}
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #f2c230;
+            color: #513b00;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #185785;
+        }
+
+        .place {
+            border-bottom: 1px solid #f0d98a;
+            padding: 15px 0;
+        }
+
+        .naiwa {
+            display: block;
+            width: 200px;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌏 旅遊景點分享網站</h1>
+    <img src="{{ url_for('static', filename='naiwa.jpg') }}"
+     alt="奶蛙"
+     class="naiwa">
+
+    <div class="card">
+        <h2>新增旅遊景點</h2>
+
+        <form method="POST">
+
+            <label>景點名稱</label>
+            <input type="text" name="place" required>
+
+            <label>分享者</label>
+            <input type="text" name="author" required>
+
+            <label>景點介紹</label>
+            <textarea name="description" rows="4" required></textarea>
+
+            <button type="submit">新增分享</button>
+
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>旅遊景點列表</h2>
+
+        {% for item in places %}
+
+        <div class="place">
+            <h3>📍 {{ item.place }}</h3>
+            <p>分享者：{{ item.author }}</p>
+            <p>{{ item.description }}</p>
+        </div>
+
+        {% else %}
+
+        <p>目前還沒有旅遊景點，快來新增第一筆分享吧！</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
